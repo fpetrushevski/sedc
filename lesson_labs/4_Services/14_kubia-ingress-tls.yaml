@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubia-tls
+spec:
+  ingressClassName: azure-application-gateway
+  # ingressClassName: nginx -- minikube
+  tls:
+  - hosts: 
+    - kubia.example.com
+    secretName: tls-secret
+  rules:
+  - host: kubia.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            # name: kubia-nodeport -- minikube
+            name: kubia
+            port:
+              number: 80
