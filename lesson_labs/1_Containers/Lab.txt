@@ -1,0 +1,5 @@
+https://cloudacademy.com/lab/start-with-docker-on-linux/
+
+https://cloudacademy.com/lab-challenge/docker-basics-challenge/
+
+https://cloudacademy.com/lab/docker-playground/
