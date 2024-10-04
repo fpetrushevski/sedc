@@ -1,0 +1,4 @@
+FROM alpine:latest
+ENV variable=Tutorials
+ENTRYPOINT ["/bin/echo", "$variable"]    
+# ENTRYPOINT ["/bin/sh", "-c", "echo $variable" ]

@@ -1,0 +1,13 @@
+docker build -t entrypoint-cmd-demo:latest . -f Dockerfile
+
+docker run entrypoint-cmd-demo:latest
+
+docker run entrypoint-cmd-demo:latest -s
+
+docker build -t entrypoint-cmd-demo2:latest . -f Dockerfile2
+
+docker run entrypoint-cmd-demo2:latest
+
+docker run entrypoint-cmd-demo2:latest filip
+
+docker run --entrypoint sh entrypoint-cmd-demo2:latest -c "ls -ltrh"

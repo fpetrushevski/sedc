@@ -1,0 +1,17 @@
+docker build -t entrypoint-demo:latest . -f Dockerfile
+
+docker run entrypoint-demo:latest
+
+docker run entrypoint-demo:latest -alh
+
+docker build -t entrypoint-demo2:latest . -f Dockerfile2
+
+docker run entrypoint-demo2:latest
+
+docker run entrypoint-demo2:latest filip
+
+docker build -t entrypoint-demo3:latest . -f Dockerfile3
+
+docker run entrypoint-demo3:latest
+
+docker run entrypoint-demo3:latest filip

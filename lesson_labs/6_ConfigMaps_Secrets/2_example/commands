@@ -1,0 +1,9 @@
+docker build -t cmd-demo:latest .
+
+docker run cmd-demo:latest 
+
+docker run cmd-demo:latest -alh
+
+docker run cmd-demo:latest ls -alh
+
+/bin/sh -c "ls"
