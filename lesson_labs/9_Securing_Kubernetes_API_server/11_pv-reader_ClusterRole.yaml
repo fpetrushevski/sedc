@@ -1,0 +1,31 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: pv-reader
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumes
+  - namespaces
+  verbs:
+  - get
+  - list
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv
+  namespace: foo
+spec:
+  capacity: 
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+    - ReadOnlyMany
+    # - ReadWriteMany
+    # - ReadWriteOncePod
+  persistentVolumeReclaimPolicy: Delete
+  hostPath:
+    path: /tmp/mongodb
+ 

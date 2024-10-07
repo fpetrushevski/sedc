@@ -1,0 +1,5 @@
+kubectl exec -it curl-default-sa -n bar -c main -- curl localhost:8001/api/v1/namespaces/bar/services
+
+kubectl exec -it curl-default-sa -n bar -c main -- curl localhost:8001/api/v1/namespaces
+
+kubectl exec -it curl-default-sa -n bar -c main -- curl localhost:8001/api/v1/namespaces/bar/pods

@@ -1,0 +1,7 @@
+kubectl exec -it curl-custom-sa -c main -- curl localhost:8001/api/v1/pods
+
+kubectl exec -it curl-custom-sa -c main -- curl localhost:8001/api/v1/namespaces/default/pods
+
+kubectl exec -it curl-default-sa -c main -- curl localhost:8001/api/v1/pods
+
+kubectl exec -it curl-default-sa -c main -- curl localhost:8001/api/v1/pods/namespaces/default/pods
