@@ -1,0 +1,29 @@
+kubectl exec -it pod-with-shared-volume-fsgroup -c first sh 
+
+echo "first" > /volume/first
+
+chmod 774 /volume/first
+
+ls -ltrh /volume
+
+echo test > /tmp/test
+
+ls -ltrh /tmp/test
+
+exit
+
+kubectl exec -it pod-with-shared-volume-fsgroup -c second sh 
+
+echo "second" > /volume/second
+
+chmod 774 /volume/second
+
+ls -ltrh /volume
+
+echo "second" >> /volume/first
+
+cat /volume/first
+
+echo test > /tmp/test
+
+ls -ltrh /tmp/test

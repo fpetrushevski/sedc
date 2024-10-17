@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: egress-net-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: kubia
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: kubia2
+    ports:
+    - port: 8080
+  - to:
+    - podSelector:
+        matchLabels:
+          app: database
+    ports:
+    - port: 8080

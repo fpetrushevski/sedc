@@ -1,0 +1,37 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: kubia
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: kubia
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          averageUtilization: 20
+          type: Utilization
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          averageUtilization: 20
+          type: Utilization
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 5
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 10
+    scaleUp:
+      stabilizationWindowSeconds: 5
+      policies:
+      - type: Percent
+        value: 30
+        periodSeconds: 10

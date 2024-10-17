@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: bar
+  labels:
+    tenant: manning
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubia
+  namespace: bar
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: kubia
+      labels:
+        app: kubia
+    spec:
+      containers:
+      - image: petrushevski/kubia:v1
+        name: nodejs
+  selector:
+    matchLabels:
+      app: kubia
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopping-cart
+  namespace: foo
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: shopping-cart
+      labels:
+        app: shopping-cart
+    spec:
+      containers:
+      - image: petrushevski/kubia:v5
+        name: nodejs
+  selector:
+    matchLabels:
+      app: shopping-cart
