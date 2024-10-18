@@ -1,0 +1,287 @@
+helm create demo
+
+helm lint demo
+
+helm template demo 
+
+helm inspect all demo
+
+helm package demo
+
+helm install app demo
+
+helm ls
+
+helm status app
+
+helm history app 
+
+helm get all app
+
+helm test app
+
+
+1. Change the "replicaCount" to "2" in values.yaml file
+
+2. Execute "helm upgrade app demo"
+
+3. kubectl get pods 
+
+4. helm history app
+
+5. kubectl get secrets
+
+6. Change the "fullnameOverride" in values.yaml to "devops"
+
+7. Execute "helm upgrade app demo"
+
+8. helm ls
+
+9. helm history app
+
+10. kubectl get pods
+
+11. kubectl get svc
+
+12. helm rollback app 2
+
+13. helm history app
+
+14. kubectl get pods
+
+15. kubectl get svc
+
+16. Execute the following commands: 
+
+cat > ./demo/templates/kubia.yaml<<EOF
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubia
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: kubia
+      labels:
+        app: kubia
+    spec:
+      containers:
+      - image: petrushevski/kubia:v1
+        name: nodejs
+  selector:
+    matchLabels:
+      app: kubia
+EOF
+
+cat > ./demo/templates/kubia-svc.yaml<<EOF
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubia
+spec:
+  type: ClusterIP
+  selector:
+    app: kubia
+  ports:
+  - port: 80
+    targetPort: 8080
+EOF
+
+17. helm upgrade app demo
+
+18. kubectl get pods,svc
+
+19. In "kubia.yaml" manifest in the "replicas" field add "{{ .Values.kubia.deploy.replicas }}"
+
+20. In "kubia-svc.yaml" manifest in the "port" field add "{{ .Values.kubia.svc.port }}"
+
+21. In "kubia-svc.yaml" manifest in the "targetPort" field add "{{ .Values.kubia.svc.targetPort }}"
+
+22. In the "values.yaml" manifest at the end of the file add this configuration 
+
+kubia:
+  deploy:
+    replicas: 2
+  svc:
+    port: 8080
+    targetPort: 8080
+
+23. helm upgrade app demo
+
+24. kubectl get pods,svc
+
+25. kubectl port-forward svc/kubia 8080:8080
+
+26. curl localhost:8080
+
+27. Execute the following commands:
+
+cat > ./demo/templates/kubia.yaml<<EOF
+{{- if .Values.kubia.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubia
+spec:
+  replicas: {{ .Values.kubia.deploy.replicas }}
+  template:
+    metadata:
+      name: kubia
+      labels:
+        app: kubia
+    spec:
+      containers:
+      - image: petrushevski/kubia:v1
+        name: nodejs
+  selector:
+    matchLabels:
+      app: kubia
+{{- end }}
+EOF
+
+cat > ./demo/templates/kubia-svc.yaml<<EOF
+{{- if .Values.kubia.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubia
+spec:
+  type: ClusterIP
+  selector:
+    app: kubia
+  ports:
+  - port: {{ .Values.kubia.svc.port }}
+    targetPort: {{ .Values.kubia.svc.targetPort }}
+{{- end }}
+EOF
+
+28. Modify(overwrite) the last configuration that you added in "values.yaml" to be like this: 
+
+kubia:
+  enabled: false
+  deploy:
+    replicas: 2
+  svc:
+    port: 8080
+    targetPort: 8080
+
+29. helm upgrade app demo
+
+30. kubectl get pods,svc
+
+31. Execute the following commands:
+
+cat > ./demo/templates/kubia-sa.yaml<<EOF
+{{- if .Values.kubia.serviceAccountKubia.enabled }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kubia
+{{- end }}
+EOF
+
+cat > ./demo/templates/kubia.yaml<<EOF
+{{- if .Values.kubia.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubia
+spec:
+  replicas: {{ .Values.kubia.deploy.replicas }}
+  template:
+    metadata:
+      name: kubia
+      labels:
+        app: kubia
+    spec:
+      serviceAccountName: {{ .Values.kubia.deploy.serviceAccount }}
+      containers:
+      - image: petrushevski/kubia:v1
+        name: nodejs
+  selector:
+    matchLabels:
+      app: kubia
+{{- end }}
+EOF
+
+32. Modify(overwrite) the last configuration that you added in "values.yaml" to be like this: 
+
+kubia:
+  enabled: true
+  serviceAccountKubia: 
+    enabled: true
+  deploy:
+    serviceAccount: kubia
+    replicas: 2
+  svc:
+    port: 8080
+    targetPort: 8080
+
+33. helm upgrade app demo
+
+34. kubectl get pods,svc,sa
+
+35. kubectl get deploy kubia -o jsonpath="{.spec.template.spec.serviceAccountName}"
+
+36. cp demo/values.yaml demo/values-DEV.yaml
+
+37. Modify(overwrite) the last configuration in "values-DEV.yaml" to be like this: 
+
+kubia:
+  enabled: true
+  serviceAccountKubia: 
+    enabled: true
+  deploy:
+    serviceAccount: kubia
+    replicas: 1
+  svc:
+    port: 80
+    targetPort: 8080
+
+And also change(overwrite) the value for "fullnameOverride" parameter in "values-DEV.yaml" to be "devops-dev"
+
+38. kubectl create namespace kubia-dev
+
+39. helm install app-dev demo -f ./demo/values-DEV.yaml -n kubia-dev
+
+40. kubectl get pods,svc,sa -n kubia-dev
+
+41. kubectl get deploy kubia -o jsonpath="{.spec.template.spec.serviceAccountName}" -n kubia-dev
+
+### Installing public helm charts
+
+1. helm search hub mongo
+
+2. Open this web page : https://artifacthub.io/ (here you can search for some helm chart)
+
+3. helm install postgres oci://registry-1.docker.io/bitnamicharts/postgresql --set auth.postgresPassword="test123"
+
+4. kubectl get pods,svc,pvc
+
+5. helm upgrade postgres oci://registry-1.docker.io/bitnamicharts/postgresql --set fullnameOverride="db" \
+   --set auth.username="sedc" \
+   --set auth.password="test123" \
+   --set auth.postgresPassword="test123"
+
+6. kubectl get pods,svc,pvc
+
+7. kubectl exec -it db-0 -- bash
+
+8. psql -U postgres
+
+9. \du
+
+10. helm list -A -a
+
+11. helm uninstall postgres
+
+12. helm uninstall app
+
+13. helm uninstall app-dev -n kubia-dev
+
+14. kubectl get pvc
+
+15. kubectl delete pvc data-db-0 
+
+16. kubectl delete pvc data-postgres-postgresql-0 
