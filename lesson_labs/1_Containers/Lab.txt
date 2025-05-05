@@ -3,3 +3,9 @@ https://cloudacademy.com/lab/start-with-docker-on-linux/
 https://cloudacademy.com/lab-challenge/docker-basics-challenge/
 
 https://cloudacademy.com/lab/docker-playground/
+
+https://platform.qa.com/lab/create-containerized-solutions-azure-kubernetes-service-aks/
+
+https://platform.qa.com/lab/using-dockerfile-and-docker-compose-build-and-run-containers/
+
+https://platform.qa.com/lab/deploying-custom-app-image-to-container-apps-using-azure-container-registry/
