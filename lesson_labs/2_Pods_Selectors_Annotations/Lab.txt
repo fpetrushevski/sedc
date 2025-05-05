@@ -1,0 +1,4 @@
+https://cloudacademy.com/lab/kubernetes-pod-design-application-developers-definition-basics/
+
+
+https://cloudacademy.com/lab/kubernetes-pod-design-application-developers-labels-selectors-and-annotations/
