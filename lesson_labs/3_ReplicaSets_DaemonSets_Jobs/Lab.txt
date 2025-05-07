@@ -1,6 +1,4 @@
 https://cloudacademy.com/lab/kubernetes-pod-design-application-developers-jobs-and-cronjobs/
 
-https://github.com/fpetrushevski/sedc/tree/main/ReplicaController_ReplicaSet_and_DaemonSet
-
 https://cloudacademy.com/lab/introduction-kubernetes-playground/ - vezbi za replication controller, replica set, horizontal autoscale, daemonSet
 
