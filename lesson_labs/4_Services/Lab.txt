@@ -1,0 +1,6 @@
+1. https://cloudacademy.com/lab/ckad-practice-exam-services-networking/ckad-practice-exam-services-networking/
+
+2. https://cloudacademy.com/lab/exposing-applications-using-kubernetes-ingress-rules/
+
+
+poteska: https://cloudacademy.com/lab/cka-practice-exam-services-and-networking/
