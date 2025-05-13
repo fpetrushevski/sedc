@@ -1,0 +1,5 @@
+https://cloudacademy.com/lab/mastering-kubernetes-pod-configuration-persistent-data/
+
+https://cloudacademy.com/lab/utilizing-ephemeral-volume-types-kubernetes/
+
+https://cloudacademy.com/lab/cka-practice-exam-storage/
