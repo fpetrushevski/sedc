@@ -1,0 +1,3 @@
+https://cloudacademy.com/lab/mastering-kubernetes-pod-configuration-config-maps-and-secrets/
+
+https://cloudacademy.com/lab/ckad-practice-exam-configuration/
