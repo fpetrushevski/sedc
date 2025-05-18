@@ -1,0 +1,9 @@
+https://cloudacademy.com/lab/deploy-a-stateless-application-in-a-kubernetes-cluster/
+
+https://cloudacademy.com/lab/kubernetes-pod-design-application-developers-deployments/
+
+https://cloudacademy.com/lab/using-kubernetes-primitives-implement-common-deployment-strategies/
+
+https://cloudacademy.com/lab/cka-practice-exam-workloads-scheduling/
+
+https://platform.qa.com/lab/ckad-practice-exam-pod-design/
