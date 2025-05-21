@@ -1,0 +1,6 @@
+curl http://kubia-0.kubia.default.svc.cluster.local:8080
+
+curl http://kubia-1.kubia.default.svc.cluster.local:8080
+
+curl -X POST -d "Hey there! This greeting was submitted to kubia-0." http://kubia-0.kubia.default.svc.cluster.local:8080
+
