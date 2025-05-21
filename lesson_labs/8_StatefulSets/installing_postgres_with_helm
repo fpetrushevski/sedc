@@ -1,0 +1,11 @@
+helm install my-postgres bitnami/postgresql \
+  --set architecture=replication \
+  --set auth.postgresPassword=test \
+  --set auth.replicationPassword=replication \
+  --set readReplicas.replicaCount=2
+
+
+kubectl run psql-client --rm -it --restart=Never \
+  --image=bitnami/postgresql:15 \
+  --env="PGPASSWORD=test" \
+  --command -- psql -h my-postgres-postgresql-read  -U postgres
