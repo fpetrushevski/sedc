@@ -1,0 +1,2 @@
+https://cloudacademy.com/lab/deploy-a-stateful-application-in-a-kubernetes-cluster/ - ne mora da se pravi delot so Kubernets Dashboard
+optional: https://cloudacademy.com/lab/eks-voteapp/
