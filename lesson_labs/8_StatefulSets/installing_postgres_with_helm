@@ -1,3 +1,6 @@
+First you will need to install Helm to your PC
+
+
 helm install my-postgres bitnami/postgresql \
   --set architecture=replication \
   --set auth.postgresPassword=test \
