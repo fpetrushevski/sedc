@@ -1,0 +1,13 @@
+kubectl get rolebindings -n foo -o json | jq '.items[] | select(.subjects[]?.kind=="ServiceAccount" and .subjects[]?.name=="default") | {name: .metadata.name, roleRef: .roleRef}'
+
+kubectl get clusterrolebindings -o json | jq '.items[] | select(.subjects[]?.kind=="ServiceAccount" and .subjects[]?.name=="my-service-account" and .subjects[]?.namespace=="example-namespace") | {name: .metadata.name, roleRef: .roleRef}'
+
+
+kubectl get clusterrolebindings -o json | jq -r '
+  .items[] 
+  | select(.subjects[]? 
+      | select(.kind=="ServiceAccount" and .name=="default" and .namespace=="foo")) 
+  | {binding: .metadata.name, clusterRole: .roleRef.name}'
+
+
+kubectl auth can-i <verb> <resource> --as=system:serviceaccount:<namespace>:<serviceaccount>
