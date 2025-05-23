@@ -1,9 +1,19 @@
-kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/namespaces/foo/services
+# kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/namespaces/foo/services
 
-kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/namespaces/foo
+# kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/namespaces/foo
 
-kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/namespaces
+# kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/namespaces
 
-kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/namespaces/foo/pods
+# kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/namespaces/foo/pods
 
-kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/persistentvolumes
+# kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/persistentvolumes
+
+kubectl exec -it kubectl-test -n foo -- bash
+
+kubectl get ns
+
+kubectl get pv
+
+kubectl get svc -n foo
+
+kubectl get pods -n foo
