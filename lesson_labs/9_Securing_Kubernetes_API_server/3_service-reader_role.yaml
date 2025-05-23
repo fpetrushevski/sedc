@@ -17,7 +17,6 @@ rules:
 - apiGroups: [""]
   verbs: ["get", "list"]
   resources: ["services"]
-
 ---
 
 apiVersion: v1
