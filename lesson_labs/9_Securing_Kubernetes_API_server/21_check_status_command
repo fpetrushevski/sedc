@@ -1,5 +1,13 @@
-kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/pods
+# kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/pods
 
-kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/namespaces/foo/pods
+# kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/namespaces/foo/pods
 
-kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/namespaces/bar/pods
+# kubectl exec -it curl-default-sa -n foo -c main -- curl localhost:8001/api/v1/namespaces/bar/pods
+
+kubectl exec -it kubectl-test -n foo -- bash
+
+kubectl get pods -n default
+
+kubectl get pods -n foo
+
+kubectl get pods -n bar
