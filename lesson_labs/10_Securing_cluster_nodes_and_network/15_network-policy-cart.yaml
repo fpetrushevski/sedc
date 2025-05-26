@@ -1,3 +1,37 @@
+# apiVersion: networking.k8s.io/v1
+# kind: NetworkPolicy
+# metadata:
+#   name: shoppingcart-netpolicy
+#   namespace: foo
+# spec:
+#   podSelector:
+#     matchLabels:
+#       app: shopping-cart 
+#   ingress:
+#   - from:
+#     - namespaceSelector:
+#         matchLabels:
+#           tenant: manning
+#   - from:
+#     - namespaceSelector:
+#         matchLabels:
+#           kubernetes.io/metadata.name: default
+#     ports:
+#     - port: 80
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny
+  namespace: foo
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  ingress: []
+
+---
+
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -6,15 +40,17 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: shopping-cart 
+      app1: shopping-cart
+      app: kubia
   ingress:
+  # - from:
+  #   - namespaceSelector:
+  #       matchLabels:
+  #         tenant: manning
   - from:
     - namespaceSelector:
         matchLabels:
-          tenant: manning
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: default
+          kubernetes.io/metadata.name: bar
     ports:
     - port: 80
+    - port: 8080
