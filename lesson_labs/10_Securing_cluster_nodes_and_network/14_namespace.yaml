@@ -36,11 +36,12 @@ spec:
     metadata:
       name: shopping-cart
       labels:
-        app: shopping-cart
+        app1: shopping-cart
+        app: kubia
     spec:
       containers:
       - image: petrushevski/kubia:v5
         name: nodejs
   selector:
     matchLabels:
-      app: shopping-cart
+      app1: shopping-cart
