@@ -1,7 +1,44 @@
+# apiVersion: networking.k8s.io/v1
+# kind: NetworkPolicy
+# metadata:
+#   name: egress-net-policy
+# spec:
+#   podSelector:
+#     matchLabels:
+#       app: kubia
+#   egress:
+#   - to:
+#     - podSelector:
+#         matchLabels:
+#           app: kubia2
+#     ports:
+#     - port: 8080
+#   - to:
+#     - podSelector:
+#         matchLabels:
+#           app: database
+#     ports:
+#     - port: 8080
+
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny
+  namespace: foo
+spec:
+  podSelector:
+    matchLabels:
+      app: kubia
+  egress: []
+
+---
+
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: egress-net-policy
+  namespace: foo
 spec:
   podSelector:
     matchLabels:
@@ -17,5 +54,9 @@ spec:
     - podSelector:
         matchLabels:
           app: database
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: bar
     ports:
     - port: 8080
