@@ -1,9 +1,64 @@
+# apiVersion: networking.k8s.io/v1
+# kind: NetworkPolicy
+# metadata:
+#   name: default-deny
+# spec:
+#   podSelector:
+#     # matchLabels:  
+#     #   app: kubia
+#   ingress: []
+
+
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: default-deny
+  namespace: default
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  ingress: []
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-kubia2-ingress
+  namespace: default
 spec:
   podSelector:
-    # matchLabels:  
-    #   app: kubia
-  ingress: []
+    matchLabels:
+      app: kubia2
+  # policyTypes:
+  # - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: foo             
+  - from:
+    - podSelector:
+          matchLabels:
+            app: kubia   
+    - ipBlock:
+        cidr: 10.244.0.38/32
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-kubia-ingress
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      app: kubia
+  # policyTypes:
+  # - Ingress
+  ingress:
+  - from:
+    - podSelector:
+          matchLabels:
+            app: kubia2
