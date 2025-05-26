@@ -1,0 +1,7 @@
+https://cloudacademy.com/lab/using-security-contexts-to-secure-kubernetes-cluster/
+
+https://cloudacademy.com/lab/control-kubernetes-network-traffic-network-policies/
+
+https://cloudacademy.com/lab/mastering-kubernetes-pod-configuration-security-contexts/
+
+https://github.com/ahmetb/kubernetes-network-policy-recipes/blob/master/00-create-cluster.md
